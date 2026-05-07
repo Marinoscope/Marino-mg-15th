@@ -1,6 +1,6 @@
 export const CONFIG = {
   // 【重要】15th用の新しいGAS WebアプリURLが完成したら、以下のURLを差し替えてください。
-  GAS_URL: "https://script.google.com/macros/s/AKfycbyHyzD-7PjpFfVpLcRCRDh5LYKtlC1N2UyxP3norl2RGD07GinRyjEIJhxllIAF3QbU/exec",  // ここだけ差し替え
+  GAS_URL: "https://script.google.com/macros/s/AKfycbyiaLT5AvD-eErJMugDKN7Kz98Hm4UuRKyv6Pfg_Kl7icqiWuxt67F4_N9CSoTigJnE/exec",  // 15th用 新URL
   TURNSTILE_SITEKEY: "0x4AAAAAACXGSWcz_G9TQ_K4", // ここだけ差し替え
   DATES: [
     "2026-06-14",
