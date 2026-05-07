@@ -18,30 +18,34 @@ function renderRound() {
 
 function makeSlotCard(date, slot) {
   const id = `${date}_S${slot}`;
+  const isSpecial = (date === '2026-06-21' && slot === 1) || (date === '2026-09-13' && slot === 1);
+  const cardBg = isSpecial ? 'bg-sakura-pink/20 border-sakura-pink/60 shadow-sakura-pink/30' : 'bg-white/60 border-gray-100';
+  const badgeHtml = isSpecial ? `<div class="text-[10px] font-bold bg-sakura-dark text-white px-2 py-0.5 rounded-full shadow-sm ml-auto">完売企画枠</div>` : '';
+
   return `
-    <div class="bg-white/60 p-4 rounded-2xl border border-gray-100 flex flex-col gap-3 relative shadow-sm">
-      <div class="flex justify-between items-center border-b border-gray-100 pb-2">
-        <div class="font-bold text-soft-brown">${formatJPDate(date)} <span class="text-sakura-dark">第${slot}部</span></div>
-        <div class="text-xs text-gray-400 font-mono">${date}</div>
+    <div class="${cardBg} p-3 sm:p-4 rounded-2xl border flex flex-col gap-2 sm:gap-3 relative shadow-sm transition-all">
+      <div class="flex items-center border-b border-gray-200/60 pb-2">
+        <div class="font-bold text-soft-brown text-sm sm:text-base">${formatJPDate(date)} <span class="text-sakura-dark">第${slot}部</span></div>
+        ${badgeHtml}
       </div>
       
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 sm:gap-4">
         <label class="flex-1">
-          <div class="text-xs text-gray-500 font-bold mb-1">応募口数（0以上）</div>
-          <input id="cnt_${id}" type="number" min="0" value="0" inputmode="numeric" pattern="[0-9]*" class="w-full px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sakura-dark/50 focus:border-sakura-dark transition-all text-center font-bold text-xl text-teal-900 bg-white shadow-inner">
+          <div class="text-[10px] sm:text-xs text-gray-500 font-bold mb-1">応募口数（0以上）</div>
+          <input id="cnt_${id}" type="number" min="0" value="0" inputmode="numeric" pattern="[0-9]*" class="w-full px-2 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sakura-dark/50 focus:border-sakura-dark transition-all text-center font-bold text-lg sm:text-xl text-teal-900 bg-white shadow-inner">
         </label>
         
-        <label class="flex flex-col items-center justify-center gap-1 cursor-pointer group mt-4">
-          <input id="rej_${id}" type="checkbox" class="w-5 h-5 accent-sakura-dark cursor-pointer rounded">
-          <span class="text-xs font-bold text-gray-500 group-hover:text-sakura-dark transition-colors">落選あり</span>
+        <label class="flex flex-col items-center justify-center gap-1 cursor-pointer group mt-4 w-14 sm:w-16 shrink-0">
+          <input id="rej_${id}" type="checkbox" class="w-5 h-5 sm:w-6 sm:h-6 accent-sakura-dark cursor-pointer rounded">
+          <span class="text-[10px] sm:text-xs font-bold text-gray-500 group-hover:text-sakura-dark transition-colors whitespace-nowrap">落選あり</span>
         </label>
       </div>
 
-      <div class="grid grid-cols-4 gap-2 mt-1">
-        <button type="button" onclick="adjSlot('${id}', -3)" class="py-1.5 rounded-lg bg-gray-50 text-gray-500 font-bold text-sm border border-gray-200 hover:bg-gray-100 active:bg-gray-200 transition-colors shadow-sm">-3</button>
-        <button type="button" onclick="adjSlot('${id}', -1)" class="py-1.5 rounded-lg bg-gray-50 text-gray-500 font-bold text-sm border border-gray-200 hover:bg-gray-100 active:bg-gray-200 transition-colors shadow-sm">-1</button>
-        <button type="button" onclick="adjSlot('${id}', 1)" class="py-1.5 rounded-lg bg-sakura-pink/20 text-sakura-dark font-bold text-sm border border-sakura-dark/30 hover:bg-sakura-pink/40 active:bg-sakura-pink transition-colors shadow-sm">+1</button>
-        <button type="button" onclick="adjSlot('${id}', 3)" class="py-1.5 rounded-lg bg-sakura-pink/20 text-sakura-dark font-bold text-sm border border-sakura-dark/30 hover:bg-sakura-pink/40 active:bg-sakura-pink transition-colors shadow-sm">+3</button>
+      <div class="grid grid-cols-4 gap-1.5 sm:gap-2 mt-1">
+        <button type="button" onclick="adjSlot('${id}', -3)" class="py-2 rounded-lg bg-sky-50 text-sky-600 font-bold text-sm sm:text-base border border-sky-200 hover:bg-sky-100 active:bg-sky-200 transition-colors shadow-sm">-3</button>
+        <button type="button" onclick="adjSlot('${id}', -1)" class="py-2 rounded-lg bg-sky-50 text-sky-600 font-bold text-sm sm:text-base border border-sky-200 hover:bg-sky-100 active:bg-sky-200 transition-colors shadow-sm">-1</button>
+        <button type="button" onclick="adjSlot('${id}', 1)" class="py-2 rounded-lg bg-rose-50 text-rose-600 font-bold text-sm sm:text-base border border-rose-200 hover:bg-rose-100 active:bg-rose-200 transition-colors shadow-sm">+1</button>
+        <button type="button" onclick="adjSlot('${id}', 3)" class="py-2 rounded-lg bg-rose-50 text-rose-600 font-bold text-sm sm:text-base border border-rose-200 hover:bg-rose-100 active:bg-rose-200 transition-colors shadow-sm">+3</button>
       </div>
     </div>
   `;
